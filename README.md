@@ -2,7 +2,7 @@
 
 My personal collection of installed Claude Code skills. Updated every time a new skill is installed.
 
-> Useful for keeping track across projects and computers, and sharing with friends.
+> Useful for keeping track across projects and computers.
 
 ---
 
