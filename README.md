@@ -100,3 +100,76 @@ My personal collection of installed Claude Code skills. Updated every time a new
 | ui-ux-pro-max | 1 | [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | 2026-04-10 |
 | frontend-design | 1 | [anthropics/claude-code](https://github.com/anthropics/claude-code) | 2026-04-10 |
 | taste-skill | 7 | [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill) | 2026-04-10 |
+
+### wshobson-agents
+> 112 specialist agents — backend, frontend, database, API, security, deployment, testing, ML, and more
+- backend-development
+- full-stack-orchestration
+- database-design
+- database-migrations
+- api-scaffolding
+- git-pr-workflows
+- agent-orchestration
+- debugging-toolkit
+- unit-testing
+- tdd-workflows
+- deployment-strategies
+- documentation-generation
+- security-scanning
+- agent-teams
+- frontend-mobile-development
+
+### claude-night-market
+> Workflow automation bundle — project lifecycle, git/PR, docs, memory, cost management
+- attune (project lifecycle: brainstorm → specify → plan → execute)
+- sanctum (full git/PR automation — commits, PRs, changelog, versioning)
+- minister (GitHub issues and label management)
+- scribe (quality-controlled documentation generation)
+- memory-palace (knowledge and decision history across projects)
+- conjure (route tasks to external LLMs for cost saving)
+- conserve (token/cost optimization)
+- hookify (custom hook automation)
+
+### alirezarezvani-claude-skills
+> Engineering and product specialist roles
+- engineering-skills
+- engineering-advanced-skills
+- fullstack-engineer
+- skill-security-auditor
+- docker-development
+- aws-architect
+- product-manager
+
+### trailofbits-security
+> Professional security audit skills from Trail of Bits research firm
+- supply-chain-risk-auditor
+- static-analysis
+- variant-analysis
+- semgrep-rule-creator
+- second-opinion
+- insecure-defaults
+- mutation-testing
+- property-based-testing
+- audit-context-building
+
+### everything-claude-code
+> Multi-agent orchestration, performance profiling, memory management for long sessions
+- ecc
+
+---
+
+## Quick Reference
+
+| Parent Skill | Sub-skills | Source | Installed |
+|---|---|---|---|
+| superpowers | 14 | [obra/superpowers](https://github.com/obra/superpowers) | 2026-04-10 |
+| context-engineering | 13 | [muratcankoylan/Agent-Skills-for-Context-Engineering](https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering) | 2026-04-10 |
+| impeccable | 18 | [pbakaus/impeccable](https://github.com/pbakaus/impeccable) | 2026-04-10 |
+| ui-ux-pro-max | 1 | [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | 2026-04-10 |
+| frontend-design | 1 | [anthropics/claude-code](https://github.com/anthropics/claude-code) | 2026-04-10 |
+| taste-skill | 7 | [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill) | 2026-04-10 |
+| wshobson-agents | 15 | [wshobson/agents](https://github.com/wshobson/agents) | 2026-04-10 |
+| claude-night-market | 8 | [athola/claude-night-market](https://github.com/athola/claude-night-market) | 2026-04-10 |
+| alirezarezvani-skills | 7 | [alirezarezvani/claude-skills](https://github.com/alirezarezvani/claude-skills) | 2026-04-10 |
+| trailofbits-security | 9 | [trailofbits/skills](https://github.com/trailofbits/skills) | 2026-04-10 |
+| everything-claude-code | 1 | [affaan-m/everything-claude-code](https://github.com/affaan-m/everything-claude-code) | 2026-04-10 |
