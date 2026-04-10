@@ -1,175 +1,148 @@
-# Claude Code Skills
+# Claude Code Setup — itsjustiago
 
-My personal collection of installed Claude Code skills. Updated every time a new skill is installed.
-
-> Useful for keeping track across projects and computers, and sharing with friends.
+My complete Claude Code configuration: skills, plugins, MCP servers, global instructions, and statusline. Drop this on any new machine and be fully set up in minutes.
 
 ---
 
-## How to read this
+## Quick Setup (New Computer)
 
-- Each section = one skill/plugin installed (the "parent")
-- Each bullet = a sub-skill bundled inside it
-- The `skills/` folder has individual files per parent with full details
+See **[setup/install.md](setup/install.md)** for the full step-by-step guide.
 
----
+TL;DR:
+```bash
+# 1. Install Claude Code
+npm install -g @anthropic-ai/claude-code
 
-## Installed Skills
+# 2. Copy config files
+cp setup/CLAUDE.md ~/.claude/CLAUDE.md
+cp setup/statusline.sh ~/.claude/statusline.sh
 
-### superpowers
-> Dev workflow methodology — brainstorming, planning, TDD, debugging, code review, git worktrees
-- brainstorming
-- dispatching-parallel-agents
-- executing-plans
-- finishing-a-development-branch
-- receiving-code-review
-- requesting-code-review
-- subagent-driven-development
-- systematic-debugging
-- test-driven-development
-- using-git-worktrees
-- using-superpowers
-- verification-before-completion
-- writing-plans
-- writing-skills
+# 3. Install all plugins (paste into terminal)
+bash setup/install-plugins.sh
 
-### context-engineering
-> Context management, multi-agent architectures, memory systems, production agent patterns
-- advanced-evaluation
-- bdi-mental-states
-- context-compression
-- context-degradation
-- context-fundamentals
-- context-optimization
-- evaluation
-- filesystem-context
-- hosted-agents
-- memory-systems
-- multi-agent-patterns
-- project-development
-- tool-design
-
-### impeccable
-> Design audit and refinement — 18 commands to detect and fix design anti-patterns
-- adapt
-- animate
-- audit
-- bolder
-- clarify
-- colorize
-- critique
-- delight
-- distill
-- harden
-- impeccable
-- layout
-- optimize
-- overdrive
-- polish
-- quieter
-- shape
-- typeset
-
-### ui-ux-pro-max
-> Data-driven design system generator — 96+ palettes, 67+ UI styles, 100+ industry rules
-- ui-ux-pro-max
-
-### frontend-design
-> Anthropic official — philosophy-first design, prevents generic AI output, intentional aesthetic decisions
-- frontend-design
-
-### taste-skill
-> Aesthetic judgment layer — 7 variants for different design moods (manually installed)
-- taste-skill (modern/premium default)
-- soft-skill (spacious, premium)
-- minimalist-skill (editorial, clean)
-- brutalist-skill (raw, mechanical)
-- redesign-skill (for upgrading existing UIs)
-- output-skill (prevents incomplete code)
-- stitch-skill (Google Stitch compatible)
+# 4. Auth MCP servers (requires browser login)
+# See mcp/README.md
+```
 
 ---
 
-## Quick Reference
+## What's In Here
 
-| Parent Skill | Sub-skills | Source | Installed |
-|---|---|---|---|
-| superpowers | 14 | [obra/superpowers](https://github.com/obra/superpowers) | 2026-04-10 |
-| context-engineering | 13 | [muratcankoylan/Agent-Skills-for-Context-Engineering](https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering) | 2026-04-10 |
-| impeccable | 18 | [pbakaus/impeccable](https://github.com/pbakaus/impeccable) | 2026-04-10 |
-| ui-ux-pro-max | 1 | [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | 2026-04-10 |
-| frontend-design | 1 | [anthropics/claude-code](https://github.com/anthropics/claude-code) | 2026-04-10 |
-| taste-skill | 7 | [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill) | 2026-04-10 |
-
-### wshobson-agents
-> 112 specialist agents — backend, frontend, database, API, security, deployment, testing, ML, and more
-- backend-development
-- full-stack-orchestration
-- database-design
-- database-migrations
-- api-scaffolding
-- git-pr-workflows
-- agent-orchestration
-- debugging-toolkit
-- unit-testing
-- tdd-workflows
-- deployment-strategies
-- documentation-generation
-- security-scanning
-- agent-teams
-- frontend-mobile-development
-
-### claude-night-market
-> Workflow automation bundle — project lifecycle, git/PR, docs, memory, cost management
-- attune (project lifecycle: brainstorm → specify → plan → execute)
-- sanctum (full git/PR automation — commits, PRs, changelog, versioning)
-- minister (GitHub issues and label management)
-- scribe (quality-controlled documentation generation)
-- memory-palace (knowledge and decision history across projects)
-- conjure (route tasks to external LLMs for cost saving)
-- conserve (token/cost optimization)
-- hookify (custom hook automation)
-
-### alirezarezvani-claude-skills
-> Engineering and product specialist roles
-- engineering-skills
-- engineering-advanced-skills
-- fullstack-engineer
-- skill-security-auditor
-- docker-development
-- aws-architect
-- product-manager
-
-### trailofbits-security
-> Professional security audit skills from Trail of Bits research firm
-- supply-chain-risk-auditor
-- static-analysis
-- variant-analysis
-- semgrep-rule-creator
-- second-opinion
-- insecure-defaults
-- mutation-testing
-- property-based-testing
-- audit-context-building
-
-### everything-claude-code
-> Multi-agent orchestration, performance profiling, memory management for long sessions
-- ecc
+| Section | What it covers |
+|---|---|
+| [setup/](setup/) | CLAUDE.md, settings, statusline, install script |
+| [mcp/](mcp/) | MCP servers — what they are and how to auth |
+| [skills/](skills/) | Every installed skill/plugin, detailed |
+| [memory/](memory/) | How Claude's memory system works |
 
 ---
 
-## Quick Reference
+## Skills & Plugins
 
-| Parent Skill | Sub-skills | Source | Installed |
-|---|---|---|---|
-| superpowers | 14 | [obra/superpowers](https://github.com/obra/superpowers) | 2026-04-10 |
-| context-engineering | 13 | [muratcankoylan/Agent-Skills-for-Context-Engineering](https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering) | 2026-04-10 |
-| impeccable | 18 | [pbakaus/impeccable](https://github.com/pbakaus/impeccable) | 2026-04-10 |
-| ui-ux-pro-max | 1 | [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | 2026-04-10 |
-| frontend-design | 1 | [anthropics/claude-code](https://github.com/anthropics/claude-code) | 2026-04-10 |
-| taste-skill | 7 | [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill) | 2026-04-10 |
-| wshobson-agents | 15 | [wshobson/agents](https://github.com/wshobson/agents) | 2026-04-10 |
-| claude-night-market | 8 | [athola/claude-night-market](https://github.com/athola/claude-night-market) | 2026-04-10 |
-| alirezarezvani-skills | 7 | [alirezarezvani/claude-skills](https://github.com/alirezarezvani/claude-skills) | 2026-04-10 |
-| trailofbits-security | 9 | [trailofbits/skills](https://github.com/trailofbits/skills) | 2026-04-10 |
-| everything-claude-code | 1 | [affaan-m/everything-claude-code](https://github.com/affaan-m/everything-claude-code) | 2026-04-10 |
+### Design
+| Plugin | Sub-skills | Source |
+|---|---|---|
+| **frontend-design** | 1 | [anthropics/claude-code](https://github.com/anthropics/claude-code) |
+| **ui-ux-pro-max** | 1 | [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) |
+| **impeccable** | 18 | [pbakaus/impeccable](https://github.com/pbakaus/impeccable) |
+| **taste-skill** | 7 variants | [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill) |
+
+### Dev Workflow
+| Plugin | Sub-skills | Source |
+|---|---|---|
+| **superpowers** | 14 | [obra/superpowers](https://github.com/obra/superpowers) |
+| **backend-development** | — | [wshobson/agents](https://github.com/wshobson/agents) |
+| **full-stack-orchestration** | — | [wshobson/agents](https://github.com/wshobson/agents) |
+| **database-design** | — | [wshobson/agents](https://github.com/wshobson/agents) |
+| **database-migrations** | — | [wshobson/agents](https://github.com/wshobson/agents) |
+| **api-scaffolding** | — | [wshobson/agents](https://github.com/wshobson/agents) |
+| **debugging-toolkit** | — | [wshobson/agents](https://github.com/wshobson/agents) |
+| **unit-testing** | — | [wshobson/agents](https://github.com/wshobson/agents) |
+| **tdd-workflows** | — | [wshobson/agents](https://github.com/wshobson/agents) |
+| **deployment-strategies** | — | [wshobson/agents](https://github.com/wshobson/agents) |
+| **documentation-generation** | — | [wshobson/agents](https://github.com/wshobson/agents) |
+| **agent-orchestration** | — | [wshobson/agents](https://github.com/wshobson/agents) |
+| **agent-teams** | — | [wshobson/agents](https://github.com/wshobson/agents) |
+| **git-pr-workflows** | — | [wshobson/agents](https://github.com/wshobson/agents) |
+| **frontend-mobile-development** | — | [wshobson/agents](https://github.com/wshobson/agents) |
+| **fullstack-engineer** | — | [alirezarezvani/claude-skills](https://github.com/alirezarezvani/claude-skills) |
+| **engineering-skills** | — | [alirezarezvani/claude-skills](https://github.com/alirezarezvani/claude-skills) |
+| **engineering-advanced-skills** | — | [alirezarezvani/claude-skills](https://github.com/alirezarezvani/claude-skills) |
+| **docker-development** | — | [alirezarezvani/claude-skills](https://github.com/alirezarezvani/claude-skills) |
+| **aws-architect** | — | [alirezarezvani/claude-skills](https://github.com/alirezarezvani/claude-skills) |
+
+### Git & Project Management
+| Plugin | What it does | Source |
+|---|---|---|
+| **sanctum** | Full PR lifecycle automation | [claude-night-market](https://github.com/athola/claude-night-market) |
+| **attune** | Project lifecycle guide | [claude-night-market](https://github.com/athola/claude-night-market) |
+| **minister** | GitHub issues & label management | [claude-night-market](https://github.com/athola/claude-night-market) |
+| **scribe** | Quality-controlled documentation | [claude-night-market](https://github.com/athola/claude-night-market) |
+| **memory-palace** | Knowledge & decision history | [claude-night-market](https://github.com/athola/claude-night-market) |
+| **hookify** | Custom hook automation | [claude-night-market](https://github.com/athola/claude-night-market) |
+
+### Security
+| Plugin | What it does | Source |
+|---|---|---|
+| **supply-chain-risk-auditor** | Scans dependencies for vulnerabilities | [trailofbits/skills](https://github.com/trailofbits/skills) |
+| **static-analysis** | Deep static code analysis | [trailofbits/skills](https://github.com/trailofbits/skills) |
+| **variant-analysis** | Finds similar vulns across codebase | [trailofbits/skills](https://github.com/trailofbits/skills) |
+| **second-opinion** | Secondary security review | [trailofbits/skills](https://github.com/trailofbits/skills) |
+| **insecure-defaults** | Catches dangerous default configs | [trailofbits/skills](https://github.com/trailofbits/skills) |
+| **mutation-testing** | Tests your tests for completeness | [trailofbits/skills](https://github.com/trailofbits/skills) |
+| **property-based-testing** | Auto-generates edge case inputs | [trailofbits/skills](https://github.com/trailofbits/skills) |
+| **semgrep-rule-creator** | Custom security rules for your codebase | [trailofbits/skills](https://github.com/trailofbits/skills) |
+| **skill-security-auditor** | Code security audit | [alirezarezvani/claude-skills](https://github.com/alirezarezvani/claude-skills) |
+| **security-scanning** | Code-level security review | [wshobson/agents](https://github.com/wshobson/agents) |
+
+### AI & Agents
+| Plugin | What it does | Source |
+|---|---|---|
+| **context-engineering** | 13 context/memory/multi-agent skills | [muratcankoylan/Agent-Skills-for-Context-Engineering](https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering) |
+| **ecc** | Multi-agent orchestration & memory mgmt | [affaan-m/everything-claude-code](https://github.com/affaan-m/everything-claude-code) |
+| **conjure** | Routes tasks to cheaper external LLMs | [claude-night-market](https://github.com/athola/claude-night-market) |
+| **conserve** | Token & cost optimization | [claude-night-market](https://github.com/athola/claude-night-market) |
+
+### Product
+| Plugin | What it does | Source |
+|---|---|---|
+| **product-manager** | Product thinking, PRDs, prioritization | [alirezarezvani/claude-skills](https://github.com/alirezarezvani/claude-skills) |
+
+---
+
+## MCP Servers
+
+| Server | What it does | Auth |
+|---|---|---|
+| **Supabase** | Database, auth, storage, edge functions | OAuth — `mcp.supabase.com` |
+| **Vercel** | Deploy, manage projects, logs, domains | OAuth — `mcp.vercel.com` |
+| **Magic (21st.dev)** | UI component generation from descriptions | API key |
+
+See [mcp/README.md](mcp/README.md) for setup instructions.
+
+---
+
+## Global Instructions (CLAUDE.md)
+
+See [setup/CLAUDE.md](setup/CLAUDE.md) — loaded automatically in every conversation.
+
+Current rules:
+- Always install skills globally, not project-level
+- Group bundled sub-skills under parent name
+- Update this repo on every skill install
+
+---
+
+## Statusline
+
+Custom statusline with progress bars for context window, rate limits, and turn count.
+
+See [setup/statusline.sh](setup/statusline.sh) — shows:
+- Model name
+- Context window usage (color-coded bar: green → yellow → red)
+- 5-hour rate limit usage + countdown to reset
+- Conversation turn count
+
+---
+
+*Last updated: 2026-04-11*
