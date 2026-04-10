@@ -1,133 +1,122 @@
 # MCP Servers
 
-MCP (Model Context Protocol) servers give Claude direct access to external services — databases, deployments, UI generation, etc. These are configured per-machine via browser OAuth or API key.
-
-Servers marked **auto** are installed automatically via plugins — no manual setup needed beyond auth.
+MCP (Model Context Protocol) servers give Claude direct access to external services. This page documents all MCP servers and built-in tools available in this setup.
 
 ---
 
-## Installed Servers
+## Built-in Claude Code Tools (No Install Needed)
 
-### GitHub *(auto via ecc)*
-**What it does:** Read and write to GitHub — create issues, open PRs, push files, search code, comment on reviews — all from within the conversation.
+These are native Claude Code capabilities — always available, nothing to configure:
 
-**How to auth:**
-Requires a `GITHUB_TOKEN` environment variable.
-1. Go to [github.com/settings/tokens](https://github.com/settings/tokens) and generate a Personal Access Token
-2. Add it to `~/.claude/settings.json` under `env`:
+| Tool | What it does |
+|------|-------------|
+| `WebSearch` | Search the web from within a conversation |
+| `WebFetch` | Fetch and read any URL |
+| `Bash` | Run shell commands |
+| `Read / Write / Edit` | Work with files on disk |
+
+---
+
+## Plugin-Installed MCP Servers (Auto via `install-plugins.sh`)
+
+These are installed automatically when you run `install-plugins.sh`. You only need to handle auth where noted.
+
+### GitHub *(ecc plugin)*
+**What it does:** Create issues, open PRs, push files, search code, comment on reviews — all from within the conversation.
+
+**Auth required:** Yes — `GITHUB_TOKEN` env variable.
+1. Go to [github.com/settings/tokens](https://github.com/settings/tokens) → generate a Personal Access Token
+2. Add to `~/.claude/settings.json`:
 ```json
 "env": {
   "GITHUB_TOKEN": "ghp_yourtoken"
 }
 ```
 
-**Source:** `@modelcontextprotocol/server-github` (via ecc plugin)
+---
+
+### Context7 *(ecc plugin)*
+**What it does:** Fetches up-to-date library documentation and code examples — so Claude always has current API references instead of stale training data.
+
+**Auth required:** None.
 
 ---
 
-### Context7 *(auto via ecc)*
-**What it does:** Fetches up-to-date documentation and code examples for any library or framework — so Claude always has current API references instead of stale training data.
+### Exa *(ecc plugin)*
+**What it does:** AI-powered semantic web search and URL fetching — better than keyword search for technical research.
 
-**How to auth:** No auth required.
-
-**Source:** `@upstash/context7-mcp` (via ecc plugin)
-
----
-
-### Exa *(auto via ecc)*
-**What it does:** AI-powered web search — semantic search, research, URL fetching. Much better than keyword search for technical queries.
-
-**How to auth:**
-Requires an `EXA_API_KEY`. Get one at [exa.ai](https://exa.ai) and add it to `~/.claude/settings.json`:
+**Auth required:** Yes — `EXA_API_KEY`. Get one at [exa.ai](https://exa.ai), then add to `~/.claude/settings.json`:
 ```json
 "env": {
   "EXA_API_KEY": "your_key"
 }
 ```
 
-**URL:** `https://mcp.exa.ai/mcp` (via ecc plugin)
+---
+
+### Memory *(ecc plugin)*
+**What it does:** Persistent knowledge graph — Claude can store and recall entities, relationships, and observations across sessions.
+
+**Auth required:** None.
 
 ---
 
-### Memory *(auto via ecc)*
-**What it does:** Persistent knowledge graph memory — Claude can store and recall entities, relationships, and observations across sessions.
+### Playwright *(ecc plugin)*
+**What it does:** Full browser automation — navigate pages, click, fill forms, take screenshots, run E2E tests.
 
-**How to auth:** No auth required.
-
-**Source:** `@modelcontextprotocol/server-memory` (via ecc plugin)
+**Auth required:** None.
 
 ---
 
-### Playwright *(auto via ecc)*
-**What it does:** Full browser automation — Claude can navigate pages, click, fill forms, take screenshots, and run end-to-end tests.
+### Sequential Thinking *(ecc plugin)*
+**What it does:** Structured step-by-step reasoning — helps Claude break down complex problems before responding.
 
-**How to auth:** No auth required.
-
-**Source:** `@playwright/mcp` (via ecc plugin)
+**Auth required:** None.
 
 ---
 
-### Sequential Thinking *(auto via ecc)*
-**What it does:** Structured step-by-step reasoning tool — helps Claude break down complex problems into explicit thought chains before responding.
+### Markitdown *(claude-night-market plugin)*
+**What it does:** Converts files (PDF, Word, Excel, PowerPoint, images) to Markdown so Claude can read them.
 
-**How to auth:** No auth required.
-
-**Source:** `@modelcontextprotocol/server-sequential-thinking` (via ecc plugin)
+**Auth required:** None. Requires `uvx` — install with `pip install uv`.
 
 ---
 
-### Markitdown *(auto via claude-night-market)*
-**What it does:** Converts any file (PDF, Word, Excel, PowerPoint, images) to Markdown — so Claude can read and work with them.
+## Manually Added MCP Servers
 
-**How to auth:** No auth required. Requires `uvx` (install via `pip install uv`).
-
-**Source:** `uvx markitdown-mcp` (via claude-night-market plugin)
-
----
+These were added manually via `claude mcp add` and require auth on each machine.
 
 ### Supabase
-**What it does:** Gives Claude direct access to your Supabase projects — query databases, manage tables, handle auth, storage, and edge functions — all without leaving the conversation.
+**What it does:** Direct access to Supabase — query databases, manage tables, auth, storage, and edge functions.
 
-**How to auth:**
-1. Open Claude Code
-2. Run any Supabase-related prompt (e.g. *"show me my Supabase projects"*)
-3. Claude will prompt you to authenticate — click the link and log in via browser
-4. Token is saved automatically
+**How to auth:** Browser OAuth — just run a Supabase-related prompt and Claude will prompt you to log in.
 
 **URL:** `https://mcp.supabase.com/mcp`
 
 ---
 
 ### Vercel
-**What it does:** Deploy projects, check deployment status, view build logs, manage domains, and get runtime logs — directly from Claude.
+**What it does:** Deploy projects, check build status, view logs, manage domains — from within Claude.
 
-**How to auth:**
-1. Open Claude Code
-2. Run any Vercel-related prompt (e.g. *"list my Vercel projects"*)
-3. Claude will prompt you to authenticate — click the link and log in via browser
-4. Token is saved automatically
+**How to auth:** Browser OAuth — just run a Vercel-related prompt and Claude will prompt you to log in.
 
 **URL:** `https://mcp.vercel.com`
 
 ---
 
 ### Magic (21st.dev)
-**What it does:** Generates polished UI components from plain descriptions. Describe what you want, Magic builds it. Integrates with your design system.
+**What it does:** Generates polished UI components from plain descriptions.
 
-**How to auth:**
-API key based. Get your key from [21st.dev](https://21st.dev) and set it up:
+**How to set up:**
 ```bash
 claude mcp add magic -- npx -y @21st-dev/magic@latest
-# Then set your API key when prompted
+# Enter your API key from 21st.dev when prompted
 ```
-
-**Command:** `npx -y @21st-dev/magic@latest`
 
 ---
 
 ## Notes
 
-- MCP tokens are stored in `~/.claude/.credentials.json` — **never commit this file**
-- Tokens expire and will prompt you to re-auth automatically
-- MCP servers only activate when relevant to the conversation
-- Servers marked **auto** are installed when you run `install-plugins.sh` — you only need to handle auth
+- `~/.claude/.credentials.json` holds OAuth tokens — **never commit this file**
+- Plugin MCPs are defined in the plugin's `.mcp.json` — they activate automatically when the plugin is enabled
+- Manually added MCPs persist in your global Claude config across projects
