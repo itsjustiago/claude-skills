@@ -10,7 +10,7 @@ Everything needed to set up Claude Code exactly the way I have it: skills, plugi
 |---|---|
 | [`setup/`](setup/) | CLAUDE.md · settings.json · statusline.sh · install script |
 | [`skills/`](skills/) | Every installed skill — what it does, sub-skills, how to use it |
-| [`mcp/`](mcp/) | MCP servers — Supabase, Vercel, Magic — setup + auth |
+| [`mcp/`](mcp/) | MCP servers — GitHub, Context7, Exa, Memory, Playwright, Markitdown, Supabase, Vercel, Magic |
 | [`memory/`](memory/) | How Claude's memory system works |
 | [`guides/`](guides/) | How to use everything — design, security, git, agents |
 
@@ -177,13 +177,20 @@ Superpowers + everything-claude-code handle coordination in the background.
 
 ## MCP Servers
 
-| Server | What it unlocks | Auth |
-|---|---|---|
-| **Supabase** | Query DB, manage tables, auth, storage, edge functions | OAuth (browser) |
-| **Vercel** | Deploy, logs, domains, project management | OAuth (browser) |
-| **Magic** | UI component generation from plain descriptions | API key |
+| Server | What it unlocks | Auth | Source |
+|---|---|---|---|
+| **GitHub** | Create issues, PRs, push files, search code, review comments | `GITHUB_TOKEN` env var | ecc plugin (auto) |
+| **Context7** | Up-to-date library docs & code examples | None | ecc plugin (auto) |
+| **Exa** | AI-powered web search & URL fetching | `EXA_API_KEY` env var | ecc plugin (auto) |
+| **Memory** | Persistent knowledge graph across sessions | None | ecc plugin (auto) |
+| **Playwright** | Full browser automation, screenshots, E2E tests | None | ecc plugin (auto) |
+| **Sequential Thinking** | Structured step-by-step reasoning | None | ecc plugin (auto) |
+| **Markitdown** | Convert PDF/Word/Excel/images to Markdown | None (needs `uvx`) | claude-night-market (auto) |
+| **Supabase** | Query DB, manage tables, auth, storage, edge functions | OAuth (browser) | Manual |
+| **Vercel** | Deploy, logs, domains, project management | OAuth (browser) | Manual |
+| **Magic** | UI component generation from plain descriptions | API key | Manual |
 
-See [mcp/README.md](mcp/README.md) for setup.
+See [mcp/README.md](mcp/README.md) for setup and auth details.
 
 ---
 
