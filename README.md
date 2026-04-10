@@ -1,148 +1,190 @@
-# Claude Code Setup — itsjustiago
+# itsjustiago — Claude Code Setup
 
-My complete Claude Code configuration: skills, plugins, MCP servers, global instructions, and statusline. Drop this on any new machine and be fully set up in minutes.
+Everything needed to set up Claude Code exactly the way I have it: skills, plugins, MCP servers, global instructions, statusline, and usage guides. Clone this on any machine and be fully configured in minutes.
 
 ---
 
-## Quick Setup (New Computer)
+## What's Inside
 
-See **[setup/install.md](setup/install.md)** for the full step-by-step guide.
+| Folder | Contents |
+|---|---|
+| [`setup/`](setup/) | CLAUDE.md · settings.json · statusline.sh · install script |
+| [`skills/`](skills/) | Every installed skill — what it does, sub-skills, how to use it |
+| [`mcp/`](mcp/) | MCP servers — Supabase, Vercel, Magic — setup + auth |
+| [`memory/`](memory/) | How Claude's memory system works |
+| [`guides/`](guides/) | How to use everything — design, security, git, agents |
 
-TL;DR:
+---
+
+## Quick Start (New Machine)
+
 ```bash
-# 1. Install Claude Code
-npm install -g @anthropic-ai/claude-code
-
-# 2. Copy config files
+# 1. Copy global instructions
 cp setup/CLAUDE.md ~/.claude/CLAUDE.md
+
+# 2. Copy statusline
 cp setup/statusline.sh ~/.claude/statusline.sh
 
-# 3. Install all plugins (paste into terminal)
+# 3. Install all plugins in one shot
 bash setup/install-plugins.sh
 
-# 4. Auth MCP servers (requires browser login)
-# See mcp/README.md
+# 4. Auth MCP servers — see mcp/README.md
+```
+
+> Full step-by-step: [setup/install.md](setup/install.md)
+
+---
+
+## Instructions for Claude Code
+
+> If you're Claude Code reading this repo on a new machine — follow this.
+
+**Your job:** Get this machine set up exactly like the original.
+
+1. Copy `setup/CLAUDE.md` → `~/.claude/CLAUDE.md`
+2. Copy `setup/statusline.sh` → `~/.claude/statusline.sh`
+3. Run `bash setup/install-plugins.sh` to install all plugins globally
+4. Tell the user which MCP servers need manual auth (see `mcp/README.md`) — you can't do that part, they need a browser
+5. Confirm everything is installed with `claude plugin list`
+6. Read `guides/` so you know how the user likes to work
+
+Global rule from `setup/CLAUDE.md`: always install skills globally, never project-level. Always update this repo when a new skill is installed.
+
+---
+
+## How to Use Everything
+
+### Design Workflow
+
+**The pipeline: UI UX Pro Max → Frontend-Design → taste-skill → Impeccable**
+
+**Step 1 — Start a new UI project**
+Tell Claude your project type. UI UX Pro Max auto-selects the right design system for your industry.
+> *"Build a landing page for a SaaS project management tool"*
+
+**Step 2 — Set the aesthetic**
+Pick a taste-skill variant before building:
+> *"Use soft-skill aesthetic"* → spacious, premium
+> *"Use minimalist-skill aesthetic"* → editorial, clean
+> *"Use brutalist-skill aesthetic"* → raw, bold
+
+**Step 3 — Direct the vision (Frontend-Design)**
+Claude will pause and ask about tone, purpose, and what makes this different before writing code. Answer honestly — this is what prevents generic AI output.
+
+**Step 4 — Refine with Impeccable**
+After any component or page is built, run:
+| Command | What it does |
+|---|---|
+| `/audit` | Full design review — flags all problems |
+| `/critique` | Honest feedback on what's weak |
+| `/polish` | Fixes spacing, padding, touch targets |
+| `/animate` | Adds subtle, intentional motion |
+| `/colorize` | Improves color usage |
+| `/delight` | Adds small premium details |
+| `/typeset` | Improves typography |
+| `/bolder` | Makes design more confident |
+| `/impeccable` | Runs the full suite |
+
+---
+
+### Security Workflow
+
+**When to use:** Before shipping anything that touches user data, auth, or payments.
+
+```
+# Check your dependencies for known vulnerabilities
+"Run a supply chain audit on this project"
+
+# Deep code review on a specific module
+"Security review the auth module"
+
+# Check for dangerous defaults in config
+"Check for insecure defaults in this config"
+
+# Find similar vulnerabilities across the whole codebase
+"Run variant analysis on the payment processing code"
+
+# Second opinion before shipping
+"Give me a second opinion on the security of this feature"
 ```
 
 ---
 
-## What's In Here
+### Git & PR Workflow
 
-| Section | What it covers |
-|---|---|
-| [setup/](setup/) | CLAUDE.md, settings, statusline, install script |
-| [mcp/](mcp/) | MCP servers — what they are and how to auth |
-| [skills/](skills/) | Every installed skill/plugin, detailed |
-| [memory/](memory/) | How Claude's memory system works |
+**Sanctum** handles everything after you finish building:
+> *"Sanctum this"* — writes commit message, names the branch, creates PR with full description, updates changelog, bumps version
+
+**Attune** runs at the start of something new:
+> *"Let's attune this project"* — walks through brainstorm → specify → plan → execute before touching code
+
+**Minister** organizes GitHub issues:
+> *"Minister: create issues for everything we need to build for the auth system"*
 
 ---
 
-## Skills & Plugins
+### Multi-Agent Workflow
+
+Run multiple Claude terminals at once, each with a specific job:
+
+```bash
+# Terminal 1
+claude  # "You're working on the backend API for the auth system"
+
+# Terminal 2
+claude  # "You're building the frontend login UI. The backend agent is handling the API."
+
+# Terminal 3
+claude  # "You're writing tests for the auth system"
+```
+
+Superpowers + everything-claude-code handle coordination in the background.
+
+---
+
+### Documentation
+
+> *"Scribe the auth module"* — generates quality-controlled docs for any module
+
+---
+
+## Installed Skills
 
 ### Design
-| Plugin | Sub-skills | Source |
-|---|---|---|
-| **frontend-design** | 1 | [anthropics/claude-code](https://github.com/anthropics/claude-code) |
-| **ui-ux-pro-max** | 1 | [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) |
-| **impeccable** | 18 | [pbakaus/impeccable](https://github.com/pbakaus/impeccable) |
-| **taste-skill** | 7 variants | [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill) |
+- **frontend-design** — Anthropic official, philosophy-first design
+- **ui-ux-pro-max** — Data-driven design system generator (96+ palettes, 67+ styles)
+- **impeccable** — 18 audit/refine commands
+- **taste-skill** — 7 aesthetic variants (taste, soft, minimalist, brutalist, redesign, output, stitch)
 
 ### Dev Workflow
-| Plugin | Sub-skills | Source |
-|---|---|---|
-| **superpowers** | 14 | [obra/superpowers](https://github.com/obra/superpowers) |
-| **backend-development** | — | [wshobson/agents](https://github.com/wshobson/agents) |
-| **full-stack-orchestration** | — | [wshobson/agents](https://github.com/wshobson/agents) |
-| **database-design** | — | [wshobson/agents](https://github.com/wshobson/agents) |
-| **database-migrations** | — | [wshobson/agents](https://github.com/wshobson/agents) |
-| **api-scaffolding** | — | [wshobson/agents](https://github.com/wshobson/agents) |
-| **debugging-toolkit** | — | [wshobson/agents](https://github.com/wshobson/agents) |
-| **unit-testing** | — | [wshobson/agents](https://github.com/wshobson/agents) |
-| **tdd-workflows** | — | [wshobson/agents](https://github.com/wshobson/agents) |
-| **deployment-strategies** | — | [wshobson/agents](https://github.com/wshobson/agents) |
-| **documentation-generation** | — | [wshobson/agents](https://github.com/wshobson/agents) |
-| **agent-orchestration** | — | [wshobson/agents](https://github.com/wshobson/agents) |
-| **agent-teams** | — | [wshobson/agents](https://github.com/wshobson/agents) |
-| **git-pr-workflows** | — | [wshobson/agents](https://github.com/wshobson/agents) |
-| **frontend-mobile-development** | — | [wshobson/agents](https://github.com/wshobson/agents) |
-| **fullstack-engineer** | — | [alirezarezvani/claude-skills](https://github.com/alirezarezvani/claude-skills) |
-| **engineering-skills** | — | [alirezarezvani/claude-skills](https://github.com/alirezarezvani/claude-skills) |
-| **engineering-advanced-skills** | — | [alirezarezvani/claude-skills](https://github.com/alirezarezvani/claude-skills) |
-| **docker-development** | — | [alirezarezvani/claude-skills](https://github.com/alirezarezvani/claude-skills) |
-| **aws-architect** | — | [alirezarezvani/claude-skills](https://github.com/alirezarezvani/claude-skills) |
+- **superpowers** — 14 skills: TDD, git worktrees, planning, debugging, code review
+- **wshobson/agents** — backend-development, full-stack-orchestration, database-design, database-migrations, api-scaffolding, debugging-toolkit, unit-testing, tdd-workflows, deployment-strategies, documentation-generation, agent-orchestration, agent-teams, git-pr-workflows, frontend-mobile-development, security-scanning
 
-### Git & Project Management
-| Plugin | What it does | Source |
-|---|---|---|
-| **sanctum** | Full PR lifecycle automation | [claude-night-market](https://github.com/athola/claude-night-market) |
-| **attune** | Project lifecycle guide | [claude-night-market](https://github.com/athola/claude-night-market) |
-| **minister** | GitHub issues & label management | [claude-night-market](https://github.com/athola/claude-night-market) |
-| **scribe** | Quality-controlled documentation | [claude-night-market](https://github.com/athola/claude-night-market) |
-| **memory-palace** | Knowledge & decision history | [claude-night-market](https://github.com/athola/claude-night-market) |
-| **hookify** | Custom hook automation | [claude-night-market](https://github.com/athola/claude-night-market) |
+### Engineering
+- **alirezarezvani/claude-skills** — engineering-skills, engineering-advanced-skills, fullstack-engineer, docker-development, aws-architect, product-manager, skill-security-auditor
+
+### Git & Project
+- **claude-night-market** — attune, sanctum, minister, scribe, memory-palace, conjure, conserve, hookify
 
 ### Security
-| Plugin | What it does | Source |
-|---|---|---|
-| **supply-chain-risk-auditor** | Scans dependencies for vulnerabilities | [trailofbits/skills](https://github.com/trailofbits/skills) |
-| **static-analysis** | Deep static code analysis | [trailofbits/skills](https://github.com/trailofbits/skills) |
-| **variant-analysis** | Finds similar vulns across codebase | [trailofbits/skills](https://github.com/trailofbits/skills) |
-| **second-opinion** | Secondary security review | [trailofbits/skills](https://github.com/trailofbits/skills) |
-| **insecure-defaults** | Catches dangerous default configs | [trailofbits/skills](https://github.com/trailofbits/skills) |
-| **mutation-testing** | Tests your tests for completeness | [trailofbits/skills](https://github.com/trailofbits/skills) |
-| **property-based-testing** | Auto-generates edge case inputs | [trailofbits/skills](https://github.com/trailofbits/skills) |
-| **semgrep-rule-creator** | Custom security rules for your codebase | [trailofbits/skills](https://github.com/trailofbits/skills) |
-| **skill-security-auditor** | Code security audit | [alirezarezvani/claude-skills](https://github.com/alirezarezvani/claude-skills) |
-| **security-scanning** | Code-level security review | [wshobson/agents](https://github.com/wshobson/agents) |
+- **trailofbits/skills** — supply-chain-risk-auditor, static-analysis, variant-analysis, semgrep-rule-creator, second-opinion, insecure-defaults, mutation-testing, property-based-testing, audit-context-building
 
 ### AI & Agents
-| Plugin | What it does | Source |
-|---|---|---|
-| **context-engineering** | 13 context/memory/multi-agent skills | [muratcankoylan/Agent-Skills-for-Context-Engineering](https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering) |
-| **ecc** | Multi-agent orchestration & memory mgmt | [affaan-m/everything-claude-code](https://github.com/affaan-m/everything-claude-code) |
-| **conjure** | Routes tasks to cheaper external LLMs | [claude-night-market](https://github.com/athola/claude-night-market) |
-| **conserve** | Token & cost optimization | [claude-night-market](https://github.com/athola/claude-night-market) |
-
-### Product
-| Plugin | What it does | Source |
-|---|---|---|
-| **product-manager** | Product thinking, PRDs, prioritization | [alirezarezvani/claude-skills](https://github.com/alirezarezvani/claude-skills) |
+- **context-engineering** — 13 skills: context-fundamentals, memory-systems, multi-agent-patterns, context-compression, and more
+- **everything-claude-code (ecc)** — Multi-agent orchestration, performance, memory management
 
 ---
 
 ## MCP Servers
 
-| Server | What it does | Auth |
+| Server | What it unlocks | Auth |
 |---|---|---|
-| **Supabase** | Database, auth, storage, edge functions | OAuth — `mcp.supabase.com` |
-| **Vercel** | Deploy, manage projects, logs, domains | OAuth — `mcp.vercel.com` |
-| **Magic (21st.dev)** | UI component generation from descriptions | API key |
+| **Supabase** | Query DB, manage tables, auth, storage, edge functions | OAuth (browser) |
+| **Vercel** | Deploy, logs, domains, project management | OAuth (browser) |
+| **Magic** | UI component generation from plain descriptions | API key |
 
-See [mcp/README.md](mcp/README.md) for setup instructions.
-
----
-
-## Global Instructions (CLAUDE.md)
-
-See [setup/CLAUDE.md](setup/CLAUDE.md) — loaded automatically in every conversation.
-
-Current rules:
-- Always install skills globally, not project-level
-- Group bundled sub-skills under parent name
-- Update this repo on every skill install
+See [mcp/README.md](mcp/README.md) for setup.
 
 ---
 
-## Statusline
-
-Custom statusline with progress bars for context window, rate limits, and turn count.
-
-See [setup/statusline.sh](setup/statusline.sh) — shows:
-- Model name
-- Context window usage (color-coded bar: green → yellow → red)
-- 5-hour rate limit usage + countdown to reset
-- Conversation turn count
-
----
-
-*Last updated: 2026-04-11*
+*Repo: github.com/itsjustiago/claude-skills — updated automatically on every skill install*
