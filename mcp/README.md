@@ -113,6 +113,8 @@ claude mcp add magic -- npx -y @21st-dev/magic@latest
 # Enter your API key from 21st.dev when prompted
 ```
 
+> **Windows note:** Both `magic` and `github` MCP servers require a `cmd /c` wrapper on Windows. In `~/.claude.json`, set `"command": "cmd"` and prepend `"/c"` and `"npx"` to the args array — e.g. `"args": ["/c", "npx", "-y", "@21st-dev/magic@latest"]`.
+
 ---
 
 ## Notes
