@@ -148,30 +148,41 @@ Superpowers + everything-claude-code handle coordination in the background.
 
 ---
 
-## Installed Skills
+## Plugin Strategy
+
+> **Why not install all plugins?** Every active plugin adds its skills to the list injected into Claude's context at session start. With 47 plugins enabled, that list consumed ~20k tokens before any work began. The active set (24 plugins) keeps startup lean while covering every real use case.
+>
+> Disabled plugins stay cached locally -- re-enabling is instant (no re-download). Just add the plugin back to  in .
+
+---
+
+## Installed Skills (24 active plugins)
 
 ### Design
-- **frontend-design** — Anthropic official, philosophy-first design
-- **ui-ux-pro-max** — Data-driven design system generator (96+ palettes, 67+ styles)
-- **impeccable** — 18 audit/refine commands
-- **taste-skill** — 7 aesthetic variants (taste, soft, minimalist, brutalist, redesign, output, stitch)
+- **frontend-design** -- Anthropic official, philosophy-first design
+- **ui-ux-pro-max** -- Data-driven design system generator (96+ palettes, 67+ styles)
+- **impeccable** -- 18 audit/refine commands
+- **taste-skill** -- 7 aesthetic variants (taste, soft, minimalist, brutalist, redesign, output, stitch)
 
 ### Dev Workflow
-- **superpowers** — 14 skills: TDD, git worktrees, planning, debugging, code review
-- **wshobson/agents** — backend-development, full-stack-orchestration, database-design, database-migrations, api-scaffolding, debugging-toolkit, unit-testing, tdd-workflows, deployment-strategies, documentation-generation, agent-orchestration, agent-teams, git-pr-workflows, frontend-mobile-development, security-scanning
+- **superpowers** -- 14 skills: TDD, git worktrees, planning, debugging, code review
+- **wshobson/agents (active)** -- backend-development, full-stack-orchestration, database-design, database-migrations, api-scaffolding, debugging-toolkit, tdd-workflows, agent-teams, git-pr-workflows, frontend-mobile-development, security-scanning
+- **wshobson/agents (disabled)** -- unit-testing, deployment-strategies, documentation-generation, agent-orchestration
 
 ### Engineering
-- **alirezarezvani/claude-skills** — engineering-skills, engineering-advanced-skills, fullstack-engineer, docker-development, aws-architect, product-manager, skill-security-auditor
+- **alirezarezvani/claude-skills (active)** -- engineering-skills, engineering-advanced-skills
+- **alirezarezvani/claude-skills (disabled)** -- fullstack-engineer, docker-development, aws-architect, product-manager, skill-security-auditor
 
 ### Git & Project
-- **claude-night-market** — attune, sanctum, minister, scribe, memory-palace, conjure, conserve, hookify
+- **claude-night-market (active)** -- attune, sanctum, conserve, abstract, leyline
+- **claude-night-market (disabled)** -- minister, scribe, memory-palace, conjure, hookify
 
 ### Security
-- **trailofbits/skills** — supply-chain-risk-auditor, static-analysis, variant-analysis, semgrep-rule-creator, second-opinion, insecure-defaults, mutation-testing, property-based-testing, audit-context-building
+- **trailofbits/skills (active)** -- audit-context-building
+- **trailofbits/skills (disabled)** -- supply-chain-risk-auditor, static-analysis, variant-analysis, semgrep-rule-creator, second-opinion, insecure-defaults, mutation-testing, property-based-testing
 
 ### AI & Agents
-- **context-engineering** — 13 skills: context-fundamentals, memory-systems, multi-agent-patterns, context-compression, and more
-- **everything-claude-code (ecc)** — Multi-agent orchestration, performance, memory management
+- **context-engineering** -- 13 skills: context-fundamentals, memory-systems, multi-agent-patterns, context-compression, and more
 
 ---
 
