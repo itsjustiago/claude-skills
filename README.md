@@ -176,6 +176,7 @@ Superpowers + everything-claude-code handle coordination in the background.
 ### Git & Project
 - **claude-night-market (active)** -- attune, sanctum, conserve, abstract, leyline
 - **claude-night-market (disabled)** -- minister, scribe, memory-palace, conjure, hookify
+- **ship** (custom) -- one-shot `stage → commit → push → open PR`, delegates commit msg to sanctum, skips quality gates
 
 ### Security
 - **trailofbits/skills (active)** -- audit-context-building
