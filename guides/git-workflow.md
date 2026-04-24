@@ -16,6 +16,31 @@ Safety: stops on `main`/`master`, warns on secret-looking files, never `--amend`
 
 Prefer `ship` over `sanctum this` for small/medium changes. Use `sanctum` when you want changelog + version bump too.
 
+## ship-merge — full one-shot release (ship + merge to main)
+> *"/ship-merge"* · *"ship and merge"* · *"dá ship e merge"* · *"ship até ao fim"*
+
+The **full lane**. Does everything `/ship` does, then lands the PR on `main` in one go.
+
+After opening the PR, Claude will:
+1. Check `gh pr view --json mergeable,statusCheckRollup,reviewDecision`
+2. Stop if the PR is **CONFLICTING**, has **failing CI**, or has **CHANGES_REQUESTED**
+3. Poll `gh pr checks` up to ~10 minutes until checks conclude
+4. Run a **light inline review** on the diff — blocks on secret patterns / committed generated trees, warns on `console.log`/`TODO`/>1000-line diffs
+5. Run `gh pr merge --squash --delete-branch --auto`
+6. Sync local: `git checkout main && git pull --ff-only && git branch -d <branch>`
+7. Return the merged PR URL
+
+**Squash-only by design.** If you want a merge commit or rebase, do it manually or use the full `sanctum:prepare-pr` → merge flow.
+
+**When to use which:**
+
+| Want | Command |
+|------|---------|
+| PR open, nothing more | `/ship` |
+| PR open + merged to main | `/ship-merge` |
+| Tests + docs + deep review + PR | `sanctum:prepare-pr` |
+| Commit + push, no PR | `sanctum:acp` |
+
 ## Sanctum — after you finish building
 > *"Sanctum this"*
 
