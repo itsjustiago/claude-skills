@@ -36,3 +36,8 @@ Write or update a guide in `guides/` when the skill:
 - Requires the user to trigger it manually at the right moment
 
 Simple auto-activating skills (background enhancers) don't need a guide entry.
+
+## Task approach
+Before non-trivial coding tasks, briefly check installed skills for one that applies — invoke it via the `Skill` tool if there's a clear match. Skip the check for one-liners and trivial edits.
+
+For grunt work (file searches, reading large outputs, simple lookups, parallel checks), dispatch to subagents via the `Agent` tool with a smaller model: `model: "haiku"` for searches/reads, `model: "sonnet"` for mid-complexity work. Stay in Opus for orchestration, planning, and complex reasoning. Don't analyze every task to pick a model — just default to Opus and override only when grunt work is well-bounded.

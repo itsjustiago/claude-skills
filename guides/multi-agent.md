@@ -25,9 +25,18 @@ Each agent gets its own isolated branch — no conflicts:
 > *"Set up git worktrees for this task"* — Superpowers handles it
 
 ## Coordination
-- **everything-claude-code (ecc)** — manages shared context between agents
-- **agent-orchestration** — coordinates task delegation
-- **agent-teams** — multi-agent team patterns
+- **agent-teams** — multi-agent team patterns, file ownership, parallel debug/feature/review presets
+- **superpowers:dispatching-parallel-agents** — when to fan out to subagents vs do work in-thread
+- **conserve** — context budget across parallel sessions; prevents bloat compounding
+- **everything-claude-code (ecc)** — bundles GitHub/Memory/Sequential-Thinking MCPs that agents share
+
+## Cheaper subagents for grunt work
+When dispatching subagents via the `Agent` tool, override the model for bounded tasks:
+- `model: "haiku"` — file searches, reading large outputs, simple lookups
+- `model: "sonnet"` — mid-complexity code work
+- Default (Opus) — orchestration, planning, complex reasoning
+
+Stay in Opus on the main thread; let subagents do the cheap parallel work.
 
 ## When to use it
 - Large features that have clearly separable parts (backend + frontend + tests)
