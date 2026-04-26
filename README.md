@@ -216,6 +216,7 @@ Superpowers + everything-claude-code handle coordination in the background.
 
 ### Dev Workflow
 - **superpowers** -- 14 skills: TDD, git worktrees, planning, debugging, code review
+- **session-handoff** (custom) -- chat-only end-of-session summary so a fresh agent can pick up after `/clear`. Triggers on *"session handoff"*, *"wrap up session"*, *"summarize before I clear"*.
 - **wshobson/agents (active)** -- backend-development, full-stack-orchestration, database-design, database-migrations, api-scaffolding, debugging-toolkit, tdd-workflows, agent-teams, git-pr-workflows, frontend-mobile-development, security-scanning
 - **wshobson/agents (disabled)** -- unit-testing, agent-orchestration, deployment-strategies, documentation-generation _(overlap with active set)_
 
