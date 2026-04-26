@@ -176,8 +176,9 @@ Superpowers + everything-claude-code handle coordination in the background.
 ### Git & Project
 - **claude-night-market (active)** -- attune, sanctum, conserve, abstract, leyline
 - **claude-night-market (disabled)** -- minister, scribe, memory-palace, conjure, hookify
-- **ship** (custom) -- one-shot `stage → commit → push → open PR`, delegates commit msg to sanctum, skips quality gates
-- **ship-merge** (custom) -- full one-shot release: `/ship` + conflict check + CI wait + light review + squash-merge to main + branch cleanup
+- **ship** (custom) -- two-skill bundle for one-shot shipping; both delegate commit msg + PR body to sanctum, skip heavy quality gates
+  - `ship` -- `stage → commit → push → open PR`, stops at PR
+  - `ship-merge` -- `/ship` + conflict check + CI wait + light review + squash-merge to main + branch cleanup
 
 ### Security
 - **trailofbits/skills (active)** -- audit-context-building
