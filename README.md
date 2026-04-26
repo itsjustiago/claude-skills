@@ -37,18 +37,70 @@ bash setup/install-plugins.sh
 
 ## Instructions for Claude Code
 
-> If you're Claude Code reading this repo on a new machine — follow this.
+> **If you're a Claude Code agent and the user just sent you this repo link** — this section is for you. The user wants their machine set up exactly like the original. You can do steps 0-6 yourself; step 7 needs the user.
 
-**Your job:** Get this machine set up exactly like the original.
+### Prerequisites (verify first)
+- `claude` CLI on PATH (`claude --version`) — required
+- `git` — required for cloning
+- `bash` available (Mac/Linux/WSL/Git Bash on Windows) — required for `install-plugins.sh`
+- `gh` CLI (`gh --version`) — recommended, used by sanctum/ship workflows
+- `uvx` (`pip install uv`) — recommended, used by markitdown MCP
 
-1. Copy `setup/CLAUDE.md` → `~/.claude/CLAUDE.md`
-2. Copy `setup/statusline.sh` → `~/.claude/statusline.sh`
-3. Run `bash setup/install-plugins.sh` to install all plugins globally
-4. Tell the user which MCP servers need manual auth (see `mcp/README.md`) — you can't do that part, they need a browser
-5. Confirm everything is installed with `claude plugin list`
-6. Read `guides/` so you know how the user likes to work
+If any required tool is missing, stop and tell the user — don't try to install system packages yourself.
 
-Global rule from `setup/CLAUDE.md`: always install skills globally, never project-level. Always update this repo when a new skill is installed.
+### Steps
+
+0. **Clone this repo somewhere you have write access:**
+   ```bash
+   git clone https://github.com/itsjustiago/claude-skills.git /tmp/claude-skills
+   cd /tmp/claude-skills
+   ```
+
+1. **Copy global instructions:**
+   ```bash
+   cp setup/CLAUDE.md ~/.claude/CLAUDE.md
+   ```
+   This is the user's global behavioral rules (skill installation policy, task approach, etc.).
+
+2. **Copy statusline:**
+   ```bash
+   cp setup/statusline.sh ~/.claude/statusline.sh
+   ```
+
+3. **Install all plugins (32 active set):**
+   ```bash
+   bash setup/install-plugins.sh
+   ```
+   The script runs `claude plugin marketplace add` for 10 marketplaces and `claude plugin install` for 32 plugins. It uses `set -e` — if any install fails, the whole script stops. If that happens, fix the failing one (usually a network blip — re-run) and continue.
+
+4. **Sync `enabledPlugins` in settings.json:**
+   The install step installs plugins but doesn't always enable them. Copy the `enabledPlugins` block and `extraKnownMarketplaces` block from `setup/settings.json` into `~/.claude/settings.json`. If `~/.claude/settings.json` doesn't exist yet, copy the whole file. Preserve any local-only keys (`voice`, `theme`, custom env vars) that the user already has.
+
+5. **Verify install:**
+   ```bash
+   claude plugin list
+   ```
+   Should show 32 active plugins. Cross-check against `setup/settings.json`'s `enabledPlugins` keys.
+
+6. **Restart Claude Code so settings take effect.** Tell the user: *"Restart Claude Code so the new plugins and CLAUDE.md load. After restart, your skill list will include the curated 32-plugin set."*
+
+7. **Hand off MCP auth to the user (you can't do this part).** Tell them:
+
+   > "Three MCP servers need API keys you'll set in `~/.claude/settings.json` under an `env` block:
+   > - **GitHub** — generate a token at https://github.com/settings/tokens, then set `GITHUB_TOKEN`
+   > - **Exa** — get a key at https://exa.ai, then set `EXA_API_KEY`
+   > - **Magic (21st.dev)** — optional, get a key at https://21st.dev
+   >
+   > Two more need browser OAuth (Claude will prompt automatically when relevant):
+   > - **Supabase** — log in via browser when you first ask Claude something Supabase-related
+   > - **Vercel** — log in via browser when you first ask Claude something Vercel-related
+   >
+   > See `mcp/README.md` for the full list and setup details."
+
+### After install
+Read `guides/design.md`, `guides/git-workflow.md`, `guides/security.md`, and `guides/multi-agent.md` so you know how this user likes to work. Then read `setup/CLAUDE.md` (now at `~/.claude/CLAUDE.md`) — it has the global behavioral rules you must follow on this machine going forward.
+
+**Global rule from `setup/CLAUDE.md`:** always install new skills globally (never project-level), and after every skill install, update *this repo* (clone, edit, push) so the next machine gets it too.
 
 ---
 
