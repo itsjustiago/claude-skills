@@ -150,13 +150,11 @@ Superpowers + everything-claude-code handle coordination in the background.
 
 ## Plugin Strategy
 
-> **Why not install all plugins?** Every active plugin adds its skills to the list injected into Claude's context at session start. With 47 plugins enabled, that list consumed ~20k tokens before any work began. The active set (24 plugins) keeps startup lean while covering every real use case.
->
-> Disabled plugins stay cached locally -- re-enabling is instant (no re-download). Just add the plugin back to  in .
+> **Why not install all plugins?** Every active plugin adds its skills to the list injected into Claude's context at session start. The active set (32 plugins) is curated by *quality*, not just usage — security tools matter even before you use them, but niche / overlapping / out-of-domain plugins get pruned. 15 plugins are intentionally disabled but cached locally for instant re-enable.
 
 ---
 
-## Installed Skills (24 active plugins)
+## Installed Skills (32 active plugins)
 
 ### Design
 - **frontend-design** -- Anthropic official, philosophy-first design
@@ -167,25 +165,26 @@ Superpowers + everything-claude-code handle coordination in the background.
 ### Dev Workflow
 - **superpowers** -- 14 skills: TDD, git worktrees, planning, debugging, code review
 - **wshobson/agents (active)** -- backend-development, full-stack-orchestration, database-design, database-migrations, api-scaffolding, debugging-toolkit, tdd-workflows, agent-teams, git-pr-workflows, frontend-mobile-development, security-scanning
-- **wshobson/agents (disabled)** -- unit-testing, deployment-strategies, documentation-generation, agent-orchestration
+- **wshobson/agents (disabled)** -- unit-testing, agent-orchestration, deployment-strategies, documentation-generation _(overlap with active set)_
 
 ### Engineering
 - **alirezarezvani/claude-skills (active)** -- engineering-skills, engineering-advanced-skills
-- **alirezarezvani/claude-skills (disabled)** -- fullstack-engineer, docker-development, aws-architect, product-manager, skill-security-auditor
+- **alirezarezvani/claude-skills (disabled)** -- fullstack-engineer, docker-development, aws-architect, product-manager, skill-security-auditor _(redundant or out-of-domain)_
 
 ### Git & Project
-- **claude-night-market (active)** -- attune, sanctum, conserve, abstract, leyline
-- **claude-night-market (disabled)** -- minister, scribe, memory-palace, conjure, hookify
+- **claude-night-market (active)** -- attune, sanctum, conserve, abstract, leyline, minister, scribe
+- **claude-night-market (disabled)** -- memory-palace, conjure, hookify _(niche / overlap with built-in memory)_
 - **ship** (custom) -- two-skill bundle for one-shot shipping; both delegate commit msg + PR body to sanctum, skip heavy quality gates
   - `ship` -- `stage → commit → push → open PR`, stops at PR
   - `ship-merge` -- `/ship` + conflict check + CI wait + light review + squash-merge to main + branch cleanup
 
 ### Security
-- **trailofbits/skills (active)** -- audit-context-building
-- **trailofbits/skills (disabled)** -- supply-chain-risk-auditor, static-analysis, variant-analysis, semgrep-rule-creator, second-opinion, insecure-defaults, mutation-testing, property-based-testing
+- **trailofbits/skills (active)** -- audit-context-building, supply-chain-risk-auditor, insecure-defaults, second-opinion, static-analysis, variant-analysis
+- **trailofbits/skills (disabled)** -- semgrep-rule-creator, mutation-testing, property-based-testing _(specialized / for mature test suites only)_
 
 ### AI & Agents
 - **context-engineering** -- 13 skills: context-fundamentals, memory-systems, multi-agent-patterns, context-compression, and more
+- **ecc** (everything-claude-code) -- 300+ skills + bundled MCP servers (GitHub, Exa, Context7, Memory, Playwright, Sequential Thinking). Heavy at session start, but the source of every MCP this setup relies on.
 
 ---
 

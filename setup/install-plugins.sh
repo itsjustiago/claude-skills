@@ -14,6 +14,7 @@ claude plugin marketplace add wshobson/agents
 claude plugin marketplace add athola/claude-night-market
 claude plugin marketplace add alirezarezvani/claude-skills
 claude plugin marketplace add trailofbits/skills
+claude plugin marketplace add affaan-m/everything-claude-code
 
 echo "Installing plugins..."
 plugins=(
@@ -49,13 +50,23 @@ plugins=(
   "sanctum@claude-night-market"
   "conserve@claude-night-market"
   "abstract@claude-night-market"
+  "minister@claude-night-market"
+  "scribe@claude-night-market"
 
   # Engineering skills
   "engineering-skills@claude-code-skills"
   "engineering-advanced-skills@claude-code-skills"
 
-  # Security audit
+  # Security
   "audit-context-building@trailofbits"
+  "supply-chain-risk-auditor@trailofbits"
+  "insecure-defaults@trailofbits"
+  "second-opinion@trailofbits"
+  "static-analysis@trailofbits"
+  "variant-analysis@trailofbits"
+
+  # Everything Claude Code (bundles GitHub/Exa/Context7/Memory/Playwright/Sequential-Thinking MCPs)
+  "ecc@ecc"
 )
 
 for plugin in "${plugins[@]}"; do
@@ -67,13 +78,16 @@ for plugin in "${plugins[@]}"; do
 done
 
 echo ""
-echo "Note: Some plugins are intentionally disabled to reduce context startup cost."
-echo "Re-enable via enabledPlugins in ~/.claude/settings.json if needed:"
-echo "  - wshobson/agents: unit-testing, deployment-strategies, documentation-generation, agent-orchestration"
-echo "  - claude-night-market: minister, scribe, memory-palace, conjure, hookify"
-echo "  - alirezarezvani/claude-skills: fullstack-engineer, docker-development, aws-architect, product-manager, skill-security-auditor"
-echo "  - trailofbits/skills: supply-chain-risk-auditor, static-analysis, variant-analysis, semgrep-rule-creator, second-opinion, insecure-defaults, mutation-testing, property-based-testing"
-echo "  - ecc (everything-claude-code)"
+echo "Note: 15 plugins are intentionally disabled — pruned for quality, not just usage."
+echo "Re-enable via enabledPlugins in ~/.claude/settings.json if a workflow demands it:"
+echo "  - wshobson/agents (4): unit-testing, agent-orchestration, deployment-strategies, documentation-generation"
+echo "      (overlap with tdd-workflows / agent-teams / scribe — already active)"
+echo "  - claude-night-market (3): memory-palace, conjure, hookify"
+echo "      (memory-palace overlaps with built-in ~/.claude/memory; conjure needs Gemini/Qwen CLIs; hookify is power-user)"
+echo "  - alirezarezvani/claude-skills (5): fullstack-engineer, docker-development, aws-architect, product-manager, skill-security-auditor"
+echo "      (overlap with engineering-skills + engineering-advanced-skills; out-of-domain extras)"
+echo "  - trailofbits/skills (3): semgrep-rule-creator, mutation-testing, property-based-testing"
+echo "      (niche — only useful for custom Semgrep rule authoring or mature test suites)"
 
 echo ""
 echo "Installing taste-skill variants (manual)..."
