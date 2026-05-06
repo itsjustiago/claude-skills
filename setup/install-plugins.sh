@@ -15,6 +15,7 @@ claude plugin marketplace add athola/claude-night-market
 claude plugin marketplace add alirezarezvani/claude-skills
 claude plugin marketplace add trailofbits/skills
 claude plugin marketplace add affaan-m/everything-claude-code
+claude plugin marketplace add bradautomates/claude-video
 
 echo "Installing plugins..."
 plugins=(
@@ -67,6 +68,9 @@ plugins=(
 
   # Everything Claude Code (bundles GitHub/Exa/Context7/Memory/Playwright/Sequential-Thinking MCPs)
   "ecc@ecc"
+
+  # Media — give Claude a video input via /watch (yt-dlp + ffmpeg + Whisper fallback)
+  "watch@claude-video"
 )
 
 for plugin in "${plugins[@]}"; do

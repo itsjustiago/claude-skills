@@ -31,7 +31,8 @@
     "second-opinion@trailofbits": true,
     "static-analysis@trailofbits": true,
     "variant-analysis@trailofbits": true,
-    "ecc@ecc": true
+    "ecc@ecc": true,
+    "watch@claude-video": true
   },
   "extraKnownMarketplaces": {
     "superpowers-dev": { "source": { "source": "github", "repo": "obra/superpowers" } },
@@ -43,7 +44,8 @@
     "claude-night-market": { "source": { "source": "github", "repo": "athola/claude-night-market" } },
     "claude-code-skills": { "source": { "source": "github", "repo": "alirezarezvani/claude-skills" } },
     "trailofbits": { "source": { "source": "github", "repo": "trailofbits/skills" } },
-    "ecc": { "source": { "source": "github", "repo": "affaan-m/everything-claude-code" } }
+    "ecc": { "source": { "source": "github", "repo": "affaan-m/everything-claude-code" } },
+    "claude-video": { "source": { "source": "github", "repo": "bradautomates/claude-video" } }
   },
   "voiceEnabled": true,
   "voice": { "enabled": true, "mode": "hold" },

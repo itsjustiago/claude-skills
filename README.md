@@ -67,11 +67,11 @@ If any required tool is missing, stop and tell the user — don't try to install
    cp setup/statusline.sh ~/.claude/statusline.sh
    ```
 
-3. **Install all plugins (32 active set):**
+3. **Install all plugins (33 active set):**
    ```bash
    bash setup/install-plugins.sh
    ```
-   The script runs `claude plugin marketplace add` for 10 marketplaces and `claude plugin install` for 32 plugins. It uses `set -e` — if any install fails, the whole script stops. If that happens, fix the failing one (usually a network blip — re-run) and continue.
+   The script runs `claude plugin marketplace add` for 11 marketplaces and `claude plugin install` for 33 plugins. It uses `set -e` — if any install fails, the whole script stops. If that happens, fix the failing one (usually a network blip — re-run) and continue.
 
 4. **Sync `enabledPlugins` in settings.json:**
    The install step installs plugins but doesn't always enable them. Copy the `enabledPlugins` block and `extraKnownMarketplaces` block from `setup/settings.json` into `~/.claude/settings.json`. If `~/.claude/settings.json` doesn't exist yet, copy the whole file. Preserve any local-only keys (`voice`, `theme`, custom env vars) that the user already has.
@@ -80,9 +80,9 @@ If any required tool is missing, stop and tell the user — don't try to install
    ```bash
    claude plugin list
    ```
-   Should show 32 active plugins. Cross-check against `setup/settings.json`'s `enabledPlugins` keys.
+   Should show 33 active plugins. Cross-check against `setup/settings.json`'s `enabledPlugins` keys.
 
-6. **Restart Claude Code so settings take effect.** Tell the user: *"Restart Claude Code so the new plugins and CLAUDE.md load. After restart, your skill list will include the curated 32-plugin set."*
+6. **Restart Claude Code so settings take effect.** Tell the user: *"Restart Claude Code so the new plugins and CLAUDE.md load. After restart, your skill list will include the curated 33-plugin set."*
 
 7. **Hand off MCP auth to the user (you can't do this part).** Tell them:
 
@@ -202,11 +202,11 @@ Superpowers + everything-claude-code handle coordination in the background.
 
 ## Plugin Strategy
 
-> **Why not install all plugins?** Every active plugin adds its skills to the list injected into Claude's context at session start. The active set (32 plugins) is curated by *quality*, not just usage — security tools matter even before you use them, but niche / overlapping / out-of-domain plugins get pruned. 15 plugins are intentionally disabled but cached locally for instant re-enable.
+> **Why not install all plugins?** Every active plugin adds its skills to the list injected into Claude's context at session start. The active set (33 plugins) is curated by *quality*, not just usage — security tools matter even before you use them, but niche / overlapping / out-of-domain plugins get pruned. 15 plugins are intentionally disabled but cached locally for instant re-enable.
 
 ---
 
-## Installed Skills (32 active plugins)
+## Installed Skills (33 active plugins)
 
 ### Design
 - **frontend-design** -- Anthropic official, philosophy-first design
@@ -238,6 +238,9 @@ Superpowers + everything-claude-code handle coordination in the background.
 ### AI & Agents
 - **context-engineering** -- 13 skills: context-fundamentals, memory-systems, multi-agent-patterns, context-compression, and more
 - **ecc** (everything-claude-code) -- 300+ skills + bundled MCP servers (GitHub, Exa, Context7, Memory, Playwright, Sequential Thinking). Heavy at session start, but the source of every MCP this setup relies on.
+
+### Media
+- **claude-video** (`/watch`) -- give Claude a video input. Paste a URL (yt-dlp supports YouTube, TikTok, Loom, X, Instagram, Vimeo, +hundreds) or local path; it downloads with yt-dlp, extracts frames with ffmpeg, transcribes via captions or Whisper, and `Read`s every frame as an image. `--start`/`--end` for focused passes on long videos.
 
 ---
 
