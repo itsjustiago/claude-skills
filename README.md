@@ -213,6 +213,7 @@ Superpowers + everything-claude-code handle coordination in the background.
 - **ui-ux-pro-max** -- Data-driven design system generator (96+ palettes, 67+ styles)
 - **impeccable** -- 18 audit/refine commands
 - **taste-skill** -- 7 aesthetic variants (taste, soft, minimalist, brutalist, redesign, output, stitch)
+- **open-design** -- 74-skill bundle (web/mobile/decks/docs/posters/critique) sourced from [nexu-io/open-design](https://github.com/nexu-io/open-design). Pair with taste-skill aesthetic. See [skills/open-design.md](skills/open-design.md).
 
 ### Dev Workflow
 - **superpowers** -- 14 skills: TDD, git worktrees, planning, debugging, code review

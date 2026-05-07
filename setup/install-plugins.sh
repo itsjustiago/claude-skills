@@ -101,4 +101,19 @@ for skill in taste-skill soft-skill minimalist-skill brutalist-skill redesign-sk
 done
 
 echo ""
+echo "Installing open-design skill bundle (74 skills, manual)..."
+OD_TMP="$(mktemp -d 2>/dev/null || mktemp -d -t opendesign)"
+git clone --depth 1 --filter=blob:none --sparse https://github.com/nexu-io/open-design.git "$OD_TMP/open-design" >/dev/null 2>&1 \
+  && (cd "$OD_TMP/open-design" && git sparse-checkout set skills design-systems >/dev/null 2>&1) \
+  && mkdir -p ~/.claude/skills ~/.claude/skills-source/open-design \
+  && cp -r "$OD_TMP/open-design/skills/"* ~/.claude/skills/ \
+  && cp -r "$OD_TMP/open-design/design-systems" ~/.claude/skills-source/open-design/ \
+  && cp -r "$OD_TMP/open-design/skills" ~/.claude/skills-source/open-design/ \
+  && cp "$OD_TMP/open-design/LICENSE" ~/.claude/skills-source/open-design/ 2>/dev/null \
+  && cp "$OD_TMP/open-design/README.md" ~/.claude/skills-source/open-design/README-open-design.md 2>/dev/null \
+  && echo "  v open-design (74 skills + 139 design-systems source)" \
+  || echo "  x open-design (clone failed)"
+rm -rf "$OD_TMP"
+
+echo ""
 echo "Done! Auth your MCP servers - see mcp/README.md"
