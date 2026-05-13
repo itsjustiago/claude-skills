@@ -117,6 +117,19 @@ claude mcp add magic -- npx -y @21st-dev/magic@latest
 
 ---
 
+### Higgsfield
+**What it does:** AI image and video generation — image-to-video with motion controls, character consistency, marketing studio, virality prediction. 16 tools: `generate_image`, `generate_video`, `balance`, `show_characters`, `show_generations`, `show_marketing_studio`, `virality_predictor`, plus workspace/media management.
+
+**How to set up:**
+```bash
+claude mcp add --transport http --scope user higgsfield https://mcp.higgsfield.ai/mcp
+```
+Then trigger OAuth via the `/mcp` slash command (or just ask Claude to do something Higgsfield-related — the browser flow opens automatically).
+
+**URL:** `https://mcp.higgsfield.ai/mcp`
+
+---
+
 ## Notes
 
 - `~/.claude/.credentials.json` holds OAuth tokens — **never commit this file**

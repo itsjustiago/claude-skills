@@ -10,7 +10,7 @@ Everything needed to set up Claude Code exactly the way I have it: skills, plugi
 |---|---|
 | [`setup/`](setup/) | CLAUDE.md · settings.json · statusline.sh · install script |
 | [`skills/`](skills/) | Every installed skill — what it does, sub-skills, how to use it |
-| [`mcp/`](mcp/) | MCP servers — GitHub, Context7, Exa, Memory, Playwright, Markitdown, Supabase, Vercel, Magic |
+| [`mcp/`](mcp/) | MCP servers — GitHub, Context7, Exa, Memory, Playwright, Markitdown, Supabase, Vercel, Magic, Higgsfield |
 | [`memory/`](memory/) | How Claude's memory system works |
 | [`guides/`](guides/) | How to use everything — design, security, git, agents |
 
@@ -91,9 +91,10 @@ If any required tool is missing, stop and tell the user — don't try to install
    > - **Exa** — get a key at https://exa.ai, then set `EXA_API_KEY`
    > - **Magic (21st.dev)** — optional, get a key at https://21st.dev
    >
-   > Two more need browser OAuth (Claude will prompt automatically when relevant):
+   > Three more need browser OAuth (Claude will prompt automatically when relevant, or trigger via `/mcp`):
    > - **Supabase** — log in via browser when you first ask Claude something Supabase-related
    > - **Vercel** — log in via browser when you first ask Claude something Vercel-related
+   > - **Higgsfield** — add with `claude mcp add --transport http --scope user higgsfield https://mcp.higgsfield.ai/mcp`, then run `/mcp` to authenticate
    >
    > See `mcp/README.md` for the full list and setup details."
 
@@ -258,6 +259,7 @@ Superpowers + everything-claude-code handle coordination in the background.
 | **Supabase** | Query DB, manage tables, auth, storage, edge functions | OAuth (browser) | Manual |
 | **Vercel** | Deploy, logs, domains, project management | OAuth (browser) | Manual |
 | **Magic** | UI component generation from plain descriptions | API key | Manual |
+| **Higgsfield** | AI image + video generation, character consistency, virality predictor | OAuth (browser) | Manual |
 
 See [mcp/README.md](mcp/README.md) for setup and auth details.
 
