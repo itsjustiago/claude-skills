@@ -67,11 +67,11 @@ If any required tool is missing, stop and tell the user — don't try to install
    cp setup/statusline.sh ~/.claude/statusline.sh
    ```
 
-3. **Install all plugins (33 active set):**
+3. **Install all plugins (33 total, 17 active by default):**
    ```bash
    bash setup/install-plugins.sh
    ```
-   The script runs `claude plugin marketplace add` for 11 marketplaces and `claude plugin install` for 33 plugins. It uses `set -e` — if any install fails, the whole script stops. If that happens, fix the failing one (usually a network blip — re-run) and continue.
+   The script runs `claude plugin marketplace add` for 11 marketplaces and `claude plugin install` for all 33 plugins. The `enabledPlugins` block in `setup/settings.json` then keeps 17 enabled and disables 16 by default — curated for actual usage (re-enable any by flipping `false` → `true`). The script uses `set -e` — if any install fails, the whole script stops. If that happens, fix the failing one (usually a network blip — re-run) and continue.
 
 4. **Sync `enabledPlugins` in settings.json:**
    The install step installs plugins but doesn't always enable them. Copy the `enabledPlugins` block and `extraKnownMarketplaces` block from `setup/settings.json` into `~/.claude/settings.json`. If `~/.claude/settings.json` doesn't exist yet, copy the whole file. Preserve any local-only keys (`voice`, `theme`, custom env vars) that the user already has.
@@ -80,9 +80,9 @@ If any required tool is missing, stop and tell the user — don't try to install
    ```bash
    claude plugin list
    ```
-   Should show 33 active plugins. Cross-check against `setup/settings.json`'s `enabledPlugins` keys.
+   Should show 33 installed plugins (17 active, 16 disabled). Cross-check against `setup/settings.json`'s `enabledPlugins` keys.
 
-6. **Restart Claude Code so settings take effect.** Tell the user: *"Restart Claude Code so the new plugins and CLAUDE.md load. After restart, your skill list will include the curated 33-plugin set."*
+6. **Restart Claude Code so settings take effect.** Tell the user: *"Restart Claude Code so the new plugins and CLAUDE.md load. After restart, your skill list will reflect the curated 17-plugin active set."*
 
 7. **Hand off MCP auth to the user (you can't do this part).** Tell them:
 
@@ -167,11 +167,7 @@ After any component or page is built, run:
 **Sanctum** handles everything after you finish building:
 > *"Sanctum this"* — writes commit message, names the branch, creates PR with full description, updates changelog, bumps version
 
-**Attune** runs at the start of something new:
-> *"Let's attune this project"* — walks through brainstorm → specify → plan → execute before touching code
-
-**Minister** organizes GitHub issues:
-> *"Minister: create issues for everything we need to build for the auth system"*
+> *Note:* **attune** (brainstorm → specify → plan → execute) and **minister** (GitHub issue triage) are installed-but-disabled in the current curated set — flip them to `true` in `setup/settings.json` if you want to use them on a project.
 
 ---
 
@@ -202,11 +198,13 @@ Superpowers + everything-claude-code handle coordination in the background.
 
 ## Plugin Strategy
 
-> **Why not install all plugins?** Every active plugin adds its skills to the list injected into Claude's context at session start. The active set (33 plugins) is curated by *quality*, not just usage — security tools matter even before you use them, but niche / overlapping / out-of-domain plugins get pruned. 15 plugins are intentionally disabled but cached locally for instant re-enable.
+> **Why not enable all installed plugins?** Every active plugin injects its skill list into Claude's context at session start — adding latency and burning tokens before you've even typed. The active set is curated for **what gets used week-to-week**, not what's nice to have on paper. 16 plugins are installed-but-disabled (one flag flip away from re-enabling) and 15 more from the same marketplaces are not installed at all (niche / overlapping). Together: 33 installed, 17 active, 16 dormant.
+
+**Pruning rationale (2026-05-13):** the wshobson workflow bundle (backend/db/api/tdd/security/agent-teams) duplicated capabilities already covered by `impeccable` + `sanctum` + `trailofbits`, and the night-market extras (leyline, attune, abstract, minister, scribe) overlapped with sanctum + superpowers. Disabling them shaved a noticeable chunk off the session-start pause without losing any actually-used workflow.
 
 ---
 
-## Installed Skills (33 active plugins)
+## Installed Skills (17 active plugins)
 
 ### Design
 - **frontend-design** -- Anthropic official, philosophy-first design
@@ -218,23 +216,24 @@ Superpowers + everything-claude-code handle coordination in the background.
 ### Dev Workflow
 - **superpowers** -- 14 skills: TDD, git worktrees, planning, debugging, code review
 - **session-handoff** (custom) -- end-of-session handoff in a single fenced block with explicit `>>> COPY <<<` / `>>> END <<<` markers (one-click copy in chat UI). Covers decisions, key files, running shells, dead-ends tried, tone reminders, and a numbered first-action list so a fresh agent resumes cleanly after `/clear`. Triggers on *"session handoff"*, *"wrap up session"*, *"summarize before I clear"*.
-- **wshobson/agents (active)** -- backend-development, full-stack-orchestration, database-design, database-migrations, api-scaffolding, debugging-toolkit, tdd-workflows, agent-teams, git-pr-workflows, frontend-mobile-development, security-scanning
-- **wshobson/agents (disabled)** -- unit-testing, agent-orchestration, deployment-strategies, documentation-generation _(overlap with active set)_
+- **wshobson/agents (installed-but-disabled)** -- backend-development, full-stack-orchestration, database-design, database-migrations, api-scaffolding, git-pr-workflows, debugging-toolkit, tdd-workflows, security-scanning, agent-teams, frontend-mobile-development _(duplicated impeccable + sanctum + trailofbits coverage; re-enable per-project if needed)_
+- **wshobson/agents (not installed)** -- unit-testing, agent-orchestration, deployment-strategies, documentation-generation
 
 ### Engineering
 - **alirezarezvani/claude-skills (active)** -- engineering-skills, engineering-advanced-skills
-- **alirezarezvani/claude-skills (disabled)** -- fullstack-engineer, docker-development, aws-architect, product-manager, skill-security-auditor _(redundant or out-of-domain)_
+- **alirezarezvani/claude-skills (not installed)** -- fullstack-engineer, docker-development, aws-architect, product-manager, skill-security-auditor _(redundant or out-of-domain)_
 
 ### Git & Project
-- **claude-night-market (active)** -- attune, sanctum, conserve, abstract, leyline, minister, scribe
-- **claude-night-market (disabled)** -- memory-palace, conjure, hookify _(niche / overlap with built-in memory)_
+- **claude-night-market (active)** -- sanctum, conserve
+- **claude-night-market (installed-but-disabled)** -- leyline, attune, abstract, minister, scribe _(duplicated sanctum + superpowers; re-enable for issue triage / docs generation if needed)_
+- **claude-night-market (not installed)** -- memory-palace, conjure, hookify
 - **ship** (custom) -- two-skill bundle for one-shot shipping; both delegate commit msg + PR body to sanctum, skip heavy quality gates
   - `ship` -- `stage → commit → push → open PR`, stops at PR
   - `ship-merge` -- `/ship` + conflict check + CI wait + light review + squash-merge to main + branch cleanup
 
 ### Security
 - **trailofbits/skills (active)** -- audit-context-building, supply-chain-risk-auditor, insecure-defaults, second-opinion, static-analysis, variant-analysis
-- **trailofbits/skills (disabled)** -- semgrep-rule-creator, mutation-testing, property-based-testing _(specialized / for mature test suites only)_
+- **trailofbits/skills (not installed)** -- semgrep-rule-creator, mutation-testing, property-based-testing _(specialized / for mature test suites only)_
 
 ### AI & Agents
 - **context-engineering** -- 13 skills: context-fundamentals, memory-systems, multi-agent-patterns, context-compression, and more
