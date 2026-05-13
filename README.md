@@ -48,13 +48,17 @@ cp setup/statusline.sh ~/.claude/statusline.sh
 
 # 4. Auth MCP servers — see mcp/README.md
 
-# 5. Open any project and run /skills-suggest
+# 5. (Optional but recommended) Install extras: design MCPs, graphify, browser-harness
+#    See setup/install-extras.md — runs each command separately so you can pick what you want
+
+# 6. Open any project and run /skills-suggest
 #    The skill-matchmaker reads your package.json/Cargo.toml/etc,
 #    proposes relevant skills from skillsbase, installs into
 #    <project>/.claude/skills/. Restart Claude after install.
 ```
 
-> Full step-by-step: [setup/install.md](setup/install.md)
+> Full step-by-step: [setup/install.md](setup/install.md)  
+> Extras (design MCPs, graphify, browser-harness): [setup/install-extras.md](setup/install-extras.md)
 
 ---
 
