@@ -19,8 +19,10 @@ echo "==> Installing core plugins..."
 core_plugins=(
   "superpowers@superpowers-dev"        # brainstorming, TDD, debug, plans, git worktrees
   "sanctum@claude-night-market"        # ship-merge PR workflow
+  "leyline@claude-night-market"        # required dependency of sanctum
   "conserve@claude-night-market"       # context-optimization, clear-context
-  "impeccable@impeccable"              # design polish (critique/polish/audit/clarify)
+  "impeccable@impeccable"              # design polish (critique/polish/audit/clarify) — v3+ has live browser editing
+  "frontend-design@claude-code-plugins" # Anthropic anti-AI-slop floor
   "watch@claude-video"                 # video clips (yt-dlp + ffmpeg + Whisper)
 )
 
