@@ -23,8 +23,10 @@ claude mcp add --scope user --transport stdio shadcn-ui npx -y @heilgar/shadcn-u
 Point at vercel.com → get Tailwind config + shadcn tokens + WCAG audit.
 
 ```bash
-claude mcp add --scope user --transport stdio designlang npx -y designlang --mcp
+claude mcp add --scope user --transport stdio designlang -- npx -y designlang mcp
 ```
+
+> Note: it's `designlang mcp` (subcommand), not `designlang --mcp` (flag). The flag form is rejected by the CLI.
 
 ---
 
