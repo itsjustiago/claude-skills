@@ -16,19 +16,42 @@ Everything needed to set up Claude Code exactly the way I have it: skills, plugi
 
 ---
 
+## Architecture (2026-05)
+
+This repo bootstraps a **lean global Claude Code setup** that pairs with a separate per-project skill catalog:
+
+| Repo | Purpose |
+|---|---|
+| **`claude-skills`** (this repo) | Bootstrap a new machine — installs ~5 core plugins, copies global configs, sets up MCP auth |
+| **[`skillsbase`](https://github.com/itsjustiago/skillsbase)** | Per-project skill catalog (~60 curated skills) — installed selectively by the `skill-matchmaker` skill when you open a project |
+
+Why split: skills loaded globally are eager (consume tokens on every session). Keeping global tiny + pulling per-project skills on demand cuts startup from ~75k to ~15k tokens, with no loss of capability.
+
+The 5 plugins kept globally are: **superpowers** (brainstorm/TDD/debug/plans/git), **sanctum** (PRs), **conserve** (context optimization), **impeccable** (design polish), **watch** (video).
+
+---
+
 ## Quick Start (New Machine)
 
 ```bash
-# 1. Copy global instructions
-cp setup/CLAUDE.md ~/.claude/CLAUDE.md
+# 1. Clone this repo
+git clone https://github.com/itsjustiago/claude-skills.git
+cd claude-skills
 
-# 2. Copy statusline
-cp setup/statusline.sh ~/.claude/statusline.sh
-
-# 3. Install all plugins in one shot
+# 2. Install core plugins + skill-matchmaker + /skills-suggest
 bash setup/install-plugins.sh
 
+# 3. Copy global configs
+cp setup/CLAUDE.md ~/.claude/CLAUDE.md
+cp setup/settings.json ~/.claude/settings.json
+cp setup/statusline.sh ~/.claude/statusline.sh
+
 # 4. Auth MCP servers — see mcp/README.md
+
+# 5. Open any project and run /skills-suggest
+#    The skill-matchmaker reads your package.json/Cargo.toml/etc,
+#    proposes relevant skills from skillsbase, installs into
+#    <project>/.claude/skills/. Restart Claude after install.
 ```
 
 > Full step-by-step: [setup/install.md](setup/install.md)
@@ -67,22 +90,25 @@ If any required tool is missing, stop and tell the user — don't try to install
    cp setup/statusline.sh ~/.claude/statusline.sh
    ```
 
-3. **Install all plugins (33 total, 17 active by default):**
+3. **Install core plugins + skill-matchmaker (5 plugins, 1 user skill, 1 slash command):**
    ```bash
    bash setup/install-plugins.sh
    ```
-   The script runs `claude plugin marketplace add` for 11 marketplaces and `claude plugin install` for all 33 plugins. The `enabledPlugins` block in `setup/settings.json` then keeps 17 enabled and disables 16 by default — curated for actual usage (re-enable any by flipping `false` → `true`). The script uses `set -e` — if any install fails, the whole script stops. If that happens, fix the failing one (usually a network blip — re-run) and continue.
+   The script runs `claude plugin marketplace add` for 4 marketplaces and `claude plugin install` for 5 core plugins (superpowers, sanctum, conserve, impeccable, watch). It also downloads the `skill-matchmaker` SKILL.md and `/skills-suggest` slash command from the skillsbase repo into `~/.claude/skills/` and `~/.claude/commands/`. If a download fails (offline / network), re-run the script.
 
-4. **Sync `enabledPlugins` in settings.json:**
-   The install step installs plugins but doesn't always enable them. Copy the `enabledPlugins` block and `extraKnownMarketplaces` block from `setup/settings.json` into `~/.claude/settings.json`. If `~/.claude/settings.json` doesn't exist yet, copy the whole file. Preserve any local-only keys (`voice`, `theme`, custom env vars) that the user already has.
+4. **Copy `settings.json`:**
+   ```bash
+   cp setup/settings.json ~/.claude/settings.json
+   ```
+   This sets `enabledPlugins` to the 5-core set. If `~/.claude/settings.json` already exists with local-only keys (`voice`, `theme`, custom env vars), merge by hand — the `enabledPlugins` and `extraKnownMarketplaces` blocks from `setup/settings.json` are what matters.
 
 5. **Verify install:**
    ```bash
    claude plugin list
    ```
-   Should show 33 installed plugins (17 active, 16 disabled). Cross-check against `setup/settings.json`'s `enabledPlugins` keys.
+   Should show 5 installed plugins, all active. Cross-check against `setup/settings.json`.
 
-6. **Restart Claude Code so settings take effect.** Tell the user: *"Restart Claude Code so the new plugins and CLAUDE.md load. After restart, your skill list will reflect the curated 17-plugin active set."*
+6. **Restart Claude Code so settings take effect.** Tell the user: *"Restart Claude Code. After restart your global skill list will be small. In any new project, run `/skills-suggest` and the matchmaker will propose project-relevant skills from the [skillsbase catalog](https://github.com/itsjustiago/skillsbase) — install, restart once, and that project has them permanently in `.claude/skills/`."*
 
 7. **Hand off MCP auth to the user (you can't do this part).** Tell them:
 
