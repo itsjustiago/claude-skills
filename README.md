@@ -1,5 +1,20 @@
 # itsjustiago — Claude Code Setup
 
+> ## ⚠️ This repo is superseded by [`skillsbase`](https://github.com/itsjustiago/skillsbase)
+>
+> `skillsbase` is now the **single source of truth** — it merges this repo's bootstrap
+> (setup scripts, configs, MCP guides) with the per-project skill catalog.
+>
+> **New machine setup:**
+> ```bash
+> git clone https://github.com/itsjustiago/skillsbase.git
+> cd skillsbase && bash setup.sh
+> ```
+>
+> This repo is kept for history only. Don't add new content here.
+
+---
+
 Everything needed to set up Claude Code exactly the way I have it: skills, plugins, MCP servers, global instructions, statusline, and usage guides. Clone this on any machine and be fully configured in minutes.
 
 ---
